@@ -1,0 +1,49 @@
+                                         +~~~~~~~~~~~~~~~~~~~~~~~~+                             
+					 | Employee_PayRoll_MySQL |
+					 +~~~~~~~~~~~~~~~~~~~~~~~~+
+
+UC1:
+create database payroll_service; 					#To Create DataBase
+show databases;                 					#To View DataBase List
+USE payroll_service;          						#To Use DataBase
+
+UC2:
+CREATE TABLE employee							#Create Table
+    -> (
+    -> id INT unsigned NOT NULL AUTO_INCREMENT,				#Unique employee ID
+    -> name VARCHAR(150) NOT NULL,					#Employee Name
+    -> salary Double NOT NULL,						#Employee Salary
+    -> start DATE NOT NULL,						#Employee Start Date
+    -> PRIMARY KEY (id)							#Emloyee ID which is primary key
+    -> );
+DESCRIBE employee;							#To Describe Tabke
+
+UC3:
+INSERT INTO employee ( name , salary, start) VALUES 			#To Insert Values in table
+	('BILL', 100000.00, '2021-01-29'),
+	('Terisa', 200000.00, '2020-05-5'),
+	('Charlie', 300000.00,'2019-03-14');
+
+UC4:
+select * from employee;							#To Retrieving Records From Employee Table	
+
+UC5:
+select salary from employee where name = 'BILL';			#To View Salary of Given Employee
+select * from employee							#To Display Employee Who joined between given date and current date 
+    -> where start BETWEEN CAST('2020-02-05' AS DATE) AND DATE(NOW()); 
+
+UC6:
+alter table employee add gender CHAR(1) after name;			#To alter(or)makeChanges to add Gender Row in Employee Table
+update employee set gender = 'M' where name = 'BILL';   		#To update gender of given Employee
+update employee set gender = 'F' where name = 'Terisa';
+update employee set gender = 'M' where name = 'Charlie'; 
+select * from employee;
+
+UC7:
+select AVG(salary) from employee where gender = 'M' group by gender;    #To Group employees whose gender is 'M' and find the Average salary
+select gender,AVG(salary) from employee group by gender;	        #To group employees according to gender and find the Average salary
+select AVG(salary) from employee;				        #To find Average salary of all employees
+select gender,COUNT(salary) from employee group by gender;	        #To group employees by there gender and get the count of employees
+select gender,SUM(salary) from employee group by gender;	        #To group employees by there gender and sum the salary of all employees
+select gender,MIN(salary) from employee group by gender;	        #To group employees by there gender and find Minimum salary among all employees
+select gender,MAX(salary) from employee group by gender;	        #To group employees by there gender and find Maximum salary among all employees
