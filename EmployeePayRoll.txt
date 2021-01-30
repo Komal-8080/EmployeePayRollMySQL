@@ -102,3 +102,15 @@ select * from employee;
 
 
 UC10:
+INSERT INTO employee ( name ,department,gender,basic_pay,deductions,taxable_pay,income_tax,net_pay, start) VALUES
+    -> ('Terisa','Marketing','F', 300000,100000,2000000,50000,150000, '2020-05-05');
+select * from employee;
++----+---------+--------------+--------------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+| id | name    | phone_number | address      | department | gender | basic_pay | deductions | taxable_pay | income_tax | net_pay | start      |
++----+---------+--------------+--------------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+|  1 | BILL    | NULL         | NULL         |            | M      |    100000 |          0 |           0 |          0 |       0 | 2021-01-29 |
+|  2 | Terisa  | NULL         | NULL         | Sales      | F      |    200000 |          0 |           0 |          0 |       0 | 2020-05-05 |
+|  3 | Charlie | NULL         | NULL         |            | M      |    300000 |          0 |           0 |          0 |       0 | 2019-03-14 |
+|  4 | Mark    | 4215632      | UnitedStates | Sales      | M      |    300000 |          0 |           0 |          0 |       0 | 2018-05-29 |
+|  5 | Terisa  | NULL         | TBD          | Marketing  | F      |    300000 |     100000 |     2000000 |      50000 |  150000 | 2020-05-05 |
++----+---------+--------------+--------------+------------+--------+-----------+------------+-------------+------------+---------+------------+
