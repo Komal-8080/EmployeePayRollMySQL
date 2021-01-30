@@ -47,3 +47,58 @@ select gender,COUNT(salary) from employee group by gender;	        #To group emp
 select gender,SUM(salary) from employee group by gender;	        #To group employees by there gender and sum the salary of all employees
 select gender,MIN(salary) from employee group by gender;	        #To group employees by there gender and find Minimum salary among all employees
 select gender,MAX(salary) from employee group by gender;	        #To group employees by there gender and find Maximum salary among all employees
+
+UC8:
+alter table employee add phone_number VARCHAR(250) AFTER name;	  #To enter Phone Number Field after name
+alter table employee add address VARCHAR(250) AFTER phone_number;#To enter address field after phone Number
+alter table employee add department VARCHAR(250) NOT NULL AFTER address; # To enter Department after address which is not null
+alter table employee alter address SET DEFAULT 'TBD'; 
+describe employee;			#To describe table
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | NO   |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| salary       | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+select * from employee;			#To display table
+
+UC9:
+alter table employee rename column salary to basic_pay; #To rename salary to basic pay
+alter table employee add deductions DOUBLE NOT NULL after basic_pay; #To add deductions filed
+alter table employee add taxable_pay DOUBLE NOT NULL after deductions; #To add Taxable pay filed
+alter table employee add income_tax DOUBLE NOT NULL after taxable_pay; #To add income tax field
+alter table employee add net_pay DOUBLE NOT NULL after income_tax; #To add NetPay field
+describe employee;							#To describe table
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | NO   |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| basic_pay    | double       | NO   |     | NULL    |                |
+| deductions   | double       | NO   |     | NULL    |                |
+| taxable_pay  | double       | NO   |     | NULL    |                |
+| income_tax   | double       | NO   |     | NULL    |                |
+| net_pay      | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+select * from employee;
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+| id | name    | phone_number | address | department | gender | basic_pay | deductions | taxable_pay | income_tax | net_pay | start      |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+|  1 | BILL    | NULL         | NULL    |            | M      |    100000 |          0 |           0 |          0 |       0 | 2021-01-29 |
+|  2 | Terisa  | NULL         | NULL    |            | F      |    200000 |          0 |           0 |          0 |       0 | 2020-05-05 |
+|  3 | Charlie | NULL         | NULL    |            | M      |    300000 |          0 |           0 |          0 |       0 | 2019-03-14 |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+
+
+UC10:
