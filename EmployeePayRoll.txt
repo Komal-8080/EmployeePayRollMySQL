@@ -1,59 +1,66 @@
-                                         +~~~~~~~~~~~~~~~~~~~~~~~~+                             
-					 | Employee_PayRoll_MySQL |
-					 +~~~~~~~~~~~~~~~~~~~~~~~~+
-
+                                         					+~~~~~~~~~~~~~~~~~~~~~~~~+                             
+										| Employee_PayRoll_MySQL |
+										+~~~~~~~~~~~~~~~~~~~~~~~~+
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC1:
-create database payroll_service; 					#To Create DataBase
-show databases;                 					#To View DataBase List
-USE payroll_service;          						#To Use DataBase
-
+create database payroll_service; 					
+show databases;                 					
+USE payroll_service;
+          						
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC2:
-CREATE TABLE employee							#Create Table
+CREATE TABLE employee							
     -> (
-    -> id INT unsigned NOT NULL AUTO_INCREMENT,				#Unique employee ID
-    -> name VARCHAR(150) NOT NULL,					#Employee Name
-    -> salary Double NOT NULL,						#Employee Salary
-    -> start DATE NOT NULL,						#Employee Start Date
-    -> PRIMARY KEY (id)							#Emloyee ID which is primary key
+    -> id INT unsigned NOT NULL AUTO_INCREMENT,				
+    -> name VARCHAR(150) NOT NULL,					
+    -> salary Double NOT NULL,						
+    -> start DATE NOT NULL,						
+    -> PRIMARY KEY (id)							
     -> );
-DESCRIBE employee;							#To Describe Tabke
+DESCRIBE employee;							
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC3:
-INSERT INTO employee ( name , salary, start) VALUES 			#To Insert Values in table
+INSERT INTO employee ( name , salary, start) VALUES 			
 	('BILL', 100000.00, '2021-01-29'),
 	('Terisa', 200000.00, '2020-05-5'),
 	('Charlie', 300000.00,'2019-03-14');
 
-UC4:
-select * from employee;							#To Retrieving Records From Employee Table	
 
+_____________________________________________________________________________________________________________________________________________________________________________________________UC4:
+select * from employee;							
+
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC5:
-select salary from employee where name = 'BILL';			#To View Salary of Given Employee
-select * from employee							#To Display Employee Who joined between given date and current date 
+select salary from employee where name = 'BILL';			
+select * from employee							 
     -> where start BETWEEN CAST('2020-02-05' AS DATE) AND DATE(NOW()); 
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC6:
-alter table employee add gender CHAR(1) after name;			#To alter(or)makeChanges to add Gender Row in Employee Table
-update employee set gender = 'M' where name = 'BILL';   		#To update gender of given Employee
+alter table employee add gender CHAR(1) after name;			
+update employee set gender = 'M' where name = 'BILL';   		
 update employee set gender = 'F' where name = 'Terisa';
 update employee set gender = 'M' where name = 'Charlie'; 
 select * from employee;
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC7:
-select AVG(salary) from employee where gender = 'M' group by gender;    #To Group employees whose gender is 'M' and find the Average salary
-select gender,AVG(salary) from employee group by gender;	        #To group employees according to gender and find the Average salary
-select AVG(salary) from employee;				        #To find Average salary of all employees
-select gender,COUNT(salary) from employee group by gender;	        #To group employees by there gender and get the count of employees
-select gender,SUM(salary) from employee group by gender;	        #To group employees by there gender and sum the salary of all employees
-select gender,MIN(salary) from employee group by gender;	        #To group employees by there gender and find Minimum salary among all employees
-select gender,MAX(salary) from employee group by gender;	        #To group employees by there gender and find Maximum salary among all employees
+select AVG(salary) from employee where gender = 'M' group by gender;    
+select gender,AVG(salary) from employee group by gender;	        
+select AVG(salary) from employee;				        
+select gender,COUNT(salary) from employee group by gender;	        
+select gender,SUM(salary) from employee group by gender;	       
+select gender,MIN(salary) from employee group by gender;	        
+select gender,MAX(salary) from employee group by gender;	        
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC8:
-alter table employee add phone_number VARCHAR(250) AFTER name;	  #To enter Phone Number Field after name
-alter table employee add address VARCHAR(250) AFTER phone_number;#To enter address field after phone Number
-alter table employee add department VARCHAR(250) NOT NULL AFTER address; # To enter Department after address which is not null
+alter table employee add phone_number VARCHAR(250) AFTER name;	  
+alter table employee add address VARCHAR(250) AFTER phone_number;
+alter table employee add department VARCHAR(250) NOT NULL AFTER address;
 alter table employee alter address SET DEFAULT 'TBD'; 
-describe employee;			#To describe table
+describe employee;			
 +--------------+--------------+------+-----+---------+----------------+
 | Field        | Type         | Null | Key | Default | Extra          |
 +--------------+--------------+------+-----+---------+----------------+
@@ -66,15 +73,16 @@ describe employee;			#To describe table
 | salary       | double       | NO   |     | NULL    |                |
 | start        | date         | NO   |     | NULL    |                |
 +--------------+--------------+------+-----+---------+----------------+
-select * from employee;			#To display table
+select * from employee;			
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC9:
-alter table employee rename column salary to basic_pay; #To rename salary to basic pay
-alter table employee add deductions DOUBLE NOT NULL after basic_pay; #To add deductions filed
-alter table employee add taxable_pay DOUBLE NOT NULL after deductions; #To add Taxable pay filed
-alter table employee add income_tax DOUBLE NOT NULL after taxable_pay; #To add income tax field
-alter table employee add net_pay DOUBLE NOT NULL after income_tax; #To add NetPay field
-describe employee;							#To describe table
+alter table employee rename column salary to basic_pay; 
+alter table employee add deductions DOUBLE NOT NULL after basic_pay; 
+alter table employee add taxable_pay DOUBLE NOT NULL after deductions; 
+alter table employee add income_tax DOUBLE NOT NULL after taxable_pay; 
+alter table employee add net_pay DOUBLE NOT NULL after income_tax; 
+describe employee;							
 +--------------+--------------+------+-----+---------+----------------+
 | Field        | Type         | Null | Key | Default | Extra          |
 +--------------+--------------+------+-----+---------+----------------+
@@ -100,7 +108,7 @@ select * from employee;
 |  3 | Charlie | NULL         | NULL    |            | M      |    300000 |          0 |           0 |          0 |       0 | 2019-03-14 |
 +----+---------+--------------+---------+------------+--------+-----------+------------+-------------+------------+---------+------------+
 
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 UC10:
 INSERT INTO employee ( name ,department,gender,basic_pay,deductions,taxable_pay,income_tax,net_pay, start) VALUES
     -> ('Terisa','Marketing','F', 300000,100000,2000000,50000,150000, '2020-05-05');
@@ -114,3 +122,159 @@ select * from employee;
 |  4 | Mark    | 4215632      | UnitedStates | Sales      | M      |    300000 |          0 |           0 |          0 |       0 | 2018-05-29 |
 |  5 | Terisa  | NULL         | TBD          | Marketing  | F      |    300000 |     100000 |     2000000 |      50000 |  150000 | 2020-05-05 |
 +----+---------+--------------+--------------+------------+--------+-----------+------------+-------------+------------+---------+------------+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________
+UC11:
+CREATE TABLE employee_details
+    -> (
+    -> id INT unsigned NOT NULL AUTO_INCREMENT,
+    -> name VARCHAR(150) NOT NULL,
+    -> phone_number VARCHAR(250),
+    -> address VARCHAR(250),
+    -> gender CHAR(1),
+    -> start DATE NOT NULL,
+    -> deptId VARCHAR(150) NOT NULL,
+    -> PRIMARY KEY (id)
+    -> );
+ CREATE TABLE dept
+    -> (
+    -> deptId INT unsigned NOT NULL AUTO_INCREMENT,
+    -> dept_name VARCHAR(150) NOT NULL,
+    -> PRIMARY KEY (id)
+    -> );
+CREATE TABLE pay_roll
+    -> (
+    -> id INT unsigned NOT NULL AUTO_INCREMENT,
+    -> basic_pay DOUBLE NOT NULL,
+    -> deductions DOUBLE NOT NULL,
+    -> taxable_pay DOUBLE NOT NULL,
+    -> income_tax DOUBLE NOT NULL,
+    -> net_pay DOUBLE NOT NULL,
+    -> PRIMARY KEY (id)
+    -> );
+ insert into employee_details (name, phone_number,address,gender,start,deptId) VALUES ('BILL', 452132,'UnitedStates','M','2021-01-29',101),
+    -> ('Terisa', 562314, 'India','F', '2020-05-5',101),
+    -> ('Charlie', 421578,'India', 'M', '2019-03-14',103),
+    -> ('Mark', 521478, 'Australia', 'M', '2018-05-29',101);
+    -> ('Terisa', 562314, 'India','F', '2020-05-5',102),
+select * from employee_details;
++----+---------+--------------+--------------+--------+------------+--------+
+| id | name    | phone_number | address      | gender | start      | deptId |
++----+---------+--------------+--------------+--------+------------+--------+
+|  1 | BILL    | 452132       | UnitedStates | M      | 2021-01-29 |    101 |
+|  2 | Terisa  | 562314       | India        | F      | 2020-05-05 |    101 |
+|  3 | Charlie | 421578       | India        | M      | 2019-03-14 |    103 |
+|  4 | Mark    | 521478       | Australia    | M      | 2018-05-29 |    101 |
+|  5 | Terisa  | 562314       | India        | F      | 2020-05-05 |    102 |
++----+---------+--------------+--------------+--------+------------+--------+
+insert into dept(deptId,dept_name) VALUES (101,'Sales'),(102,'Marketing'),(103,'HR');
+select * from dept;
++--------+-----------+
+| deptId | dept_name |
++--------+-----------+
+|    101 | Sales     |
+|    102 | Marketing |
+|    103 | HR        |
++--------+-----------+
+insert into pay_roll (basic_pay,deductions,taxable_pay,income_tax,net_pay) VALUES (100000,50000,10000,15000,100000),
+(200000,100000,15000,25000,200000),(300000,15000,10000,15000,300000),(350000,15000,25000,10000,350000);
+select * from pay_roll;
++----+-----------+------------+-------------+------------+---------+
+| id | basic_pay | deductions | taxable_pay | income_tax | net_pay |
++----+-----------+------------+-------------+------------+---------+
+|  1 |    100000 |      50000 |       10000 |      15000 |  100000 |
+|  2 |    200000 |     100000 |       15000 |      25000 |  200000 |
+|  3 |    300000 |      15000 |       10000 |      15000 |  300000 |
+|  4 |    350000 |      15000 |       25000 |      10000 |  350000 |
++----+-----------+------------+-------------+------------+---------+
+select AVG(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'F' group by gender;
++----------------+
+| AVG(basic_pay) |
++----------------+
+|         200000 |
++----------------+
+select AVG(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'M' group by gender;
++----------------+
+| AVG(basic_pay) |
++----------------+
+|         250000 |
++----------------+
+select SUM(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'M' group by gender;
++----------------+
+| SUM(basic_pay) |
++----------------+
+|         750000 |
++----------------+
+ select SUM(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'F' group by gender;
++----------------+
+| SUM(basic_pay) |
++----------------+
+|         200000 |
++----------------+
+select MIN(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'F' group by gender;
++----------------+
+| MIN(basic_pay) |
++----------------+
+|         200000 |
++----------------+
+select MAX(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'M' group by gender;
++----------------+
+| MAX(basic_pay) |
++----------------+
+|         350000 |
++----------------+
+ select COUNT(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'F' group by gender;
++------------------+
+| COUNT(basic_pay) |
++------------------+
+|                1 |
++------------------+
+select COUNT(basic_pay) from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.gender = 'M' group by gender;
++------------------+
+| COUNT(basic_pay) |
++------------------+
+|                3 |
++------------------+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________
+UC12:
+select * from employee_details;
++----+---------+--------------+--------------+--------+------------+--------+
+| id | name    | phone_number | address      | gender | start      | deptId |
++----+---------+--------------+--------------+--------+------------+--------+
+|  1 | BILL    | 452132       | UnitedStates | M      | 2021-01-29 |    101 |
+|  2 | Terisa  | 562314       | India        | F      | 2020-05-05 |    101 |
+|  3 | Charlie | 421578       | India        | M      | 2019-03-14 |    103 |
+|  4 | Mark    | 521478       | Australia    | M      | 2018-05-29 |    101 |
+|  5 | Terisa  | 562314       | India        | F      | 2020-05-05 |    102 |
++----+---------+--------------+--------------+--------+------------+--------+
+select * from dept;
++--------+-----------+
+| deptId | dept_name |
++--------+-----------+
+|    101 | Sales     |
+|    102 | Marketing |
+|    103 | HR        |
++--------+-----------+
+select * from pay_roll;
++----+-----------+------------+-------------+------------+---------+
+| id | basic_pay | deductions | taxable_pay | income_tax | net_pay |
++----+-----------+------------+-------------+------------+---------+
+|  1 |    100000 |      50000 |       10000 |      15000 |  100000 |
+|  2 |    200000 |     100000 |       15000 |      25000 |  200000 |
+|  3 |    300000 |      15000 |       10000 |      15000 |  300000 |
+|  4 |    350000 |      15000 |       25000 |      10000 |  350000 |
++----+-----------+------------+-------------+------------+---------+
+select basic_pay from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.name='BILL';
++-----------+
+| basic_pay |
++-----------+
+|    100000 |
++-----------+
+select * from pay_roll,employee_details where pay_roll.id=employee_details.id and employee_details.start BETWEEN CAST('2020-02-05' AS DATE) AND DATE(NOW()); ;
++----+-----------+------------+-------------+------------+---------+----+--------+--------------+--------------+--------+------------+--------+
+| id | basic_pay | deductions | taxable_pay | income_tax | net_pay | id | name   | phone_number | address      | gender | start      | deptId |
++----+-----------+------------+-------------+------------+---------+----+--------+--------------+--------------+--------+------------+--------+
+|  1 |    100000 |      50000 |       10000 |      15000 |  100000 |  1 | BILL   | 452132       | UnitedStates | M      | 2021-01-29 |    101 |
+|  2 |    200000 |     100000 |       15000 |      25000 |  200000 |  2 | Terisa | 562314       | India        | F      | 2020-05-05 |    101 |
++----+-----------+------------+-------------+------------+---------+----+--------+--------------+--------------+--------+------------+--------+
